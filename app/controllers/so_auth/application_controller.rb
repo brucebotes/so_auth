@@ -2,7 +2,7 @@ module SoAuth
   class ApplicationController < ActionController::Base
 
     protect_from_forgery
-
+    #temporary disabled because I cannot get cookies to work
     before_filter :check_cookie
     def check_cookie
       if !cookie_valid?

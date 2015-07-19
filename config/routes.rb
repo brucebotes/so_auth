@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   # Custom logout
   post '/logout', :to => 'so_auth/user_sessions#destroy'
+  get '/login', :to => 'so_auth/user_sessions#sign_in'
 end

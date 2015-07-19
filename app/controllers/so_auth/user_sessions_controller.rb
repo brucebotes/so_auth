@@ -36,5 +36,10 @@ class SoAuth::UserSessionsController < SoAuth::ApplicationController
     redirect_to "#{ENV['AUTH_PROVIDER_URL']}/users/sign_out"
   end
 
+  #user sign_in from a subdomain
+  def sign_in
+    redirect_to "/auth/so"
+  end  
+
 end
 
