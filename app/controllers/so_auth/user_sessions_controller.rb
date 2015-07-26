@@ -1,5 +1,5 @@
 class SoAuth::UserSessionsController < SoAuth::ApplicationController
-  before_filter :login_required, :only => [ :destroy ]
+  before_action :login_required, :only => [ :destroy ]
 
   respond_to :html
 
@@ -10,6 +10,7 @@ class SoAuth::UserSessionsController < SoAuth::ApplicationController
     user = User.find_by_id(omniauth['uid'])
     if not user
       # New user registration
+      Rails.logger.debug "Added so_auth user #{omniauth['info']['email']} to this app."
       user = User.new
       user.id = omniauth['uid']
     end
@@ -39,7 +40,8 @@ class SoAuth::UserSessionsController < SoAuth::ApplicationController
   #user sign_in from a subdomain
   def sign_in
     redirect_to "/auth/so"
-  end  
+  end
+
+
 
 end
-
