@@ -8,8 +8,10 @@ module SoAuth
     #temporary disabled because I cannot get cookies to work
     before_filter :check_cookie
     def check_cookie
-      if !cookie_valid?
-        session[:user_id] = nil
+      if "#{ENV['AUTH_PROVIDER_URL']}".match(/localhost/) == nil
+        if !cookie_valid?
+          session[:user_id] = nil
+        end
       end
     end
 
@@ -58,7 +60,7 @@ module SoAuth
         user.update('email' => user_data['email'])
         Rails.logger.debug "Added new user #{user_data['email']} to this app."
         user
-       else
+      else
         binding.pry
         nil
       end
