@@ -10,5 +10,8 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use debugger
-# gem 'debugger'
+group :development do
+	gem "pry", :group => 'development'
+	gem 'capistrano', '~> 3.4'
+	gem 'capistrano-rails', '~> 1.1'
+end
