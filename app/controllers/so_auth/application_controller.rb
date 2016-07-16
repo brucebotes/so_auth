@@ -52,6 +52,7 @@ module SoAuth
       req.body =  {:user => user_details}.to_json
       http = Net::HTTP.new( url.host, url.port )
       http.use_ssl = ( url.scheme == "https" )
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?  # by-pass SSL verification in development with https
       response = http.request( req )
       case response.code
       when '201'
@@ -61,7 +62,6 @@ module SoAuth
         Rails.logger.debug "Added new user #{user_data['email']} to this app."
         user
       else
-        binding.pry
         nil
       end
     end
